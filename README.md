@@ -1,2 +1,6 @@
 # PythonWebDemo
 我写的python web的demo
+
+JsonUtil
+数据库查询出来的数据转换为json的方法
+json串转换为实体类的方法
