@@ -1,5 +1,7 @@
 # -*- coding:utf8 -*-
 import json
+
+
 def models2list(objs):
     '''''把数据库查询出来的model对象列表转换为字典列表'''
     obj_arr = []
@@ -11,14 +13,15 @@ def models2list(objs):
         obj_arr.append(dict)
     return obj_arr
 
-def jsontobean(jsons):
 
+def jsontobean(jsons):
     '''
     Json转数据类型
     :param jsons: 
     :return: 
     '''
     return json.loads(jsons)
+
 
 def beandict2json(dicts):
     """
@@ -31,6 +34,7 @@ def beandict2json(dicts):
     else:
         return json.dumps(dicts.__dict__)
 
+
 def list2json(lists):
     '''
     list转jsonArray
@@ -42,25 +46,30 @@ def list2json(lists):
     else:
         return json.dumps(list(lists))
 
+
 def toJson(code, body, isModel=True):
     if isModel:
         return toResultJson(code=code, body=models2list(body))
     else:
         return toResultJson(code=code, body=body)
 
-def toResultJson(code, body):
+
+def toResultJson(code, body, msg):
     '''
     转Json返回码对象
     :param code: 
     :param body: 
     :return: 
     '''
-    return json.dumps(ResultJSON(code=code, body=list(body)).__dict__)
+    return json.dumps(ResultJSON(code=code, msg=msg, body=list(body)).__dict__, ensure_ascii=False)
+
 
 class ResultJSON():
     '''
     结果对象
     '''
-    def __init__(self, code, body):
+
+    def __init__(self, code, msg, body):
         self.code = code
         self.body = body
+        self.msg = msg
